@@ -4,35 +4,33 @@ function getComputerChoice() {
     return computerChoice.toLowerCase();
 }
 
-//needs fixing so other inputs aren't accepted
+
+
 function getPlayerChoice() {
     let playerChoice = prompt('Please choose Rock, Paper or Scissors.');
-        return playerChoice.toLowerCase();
+    while (playerChoice === null || playerChoice === undefined || playerChoice === '') {
+            playerChoice = prompt('That was not a valid choice, please make sure to choose either Rock, Paper or Scissors.');
+    }
+    return playerChoice;
 }
 
 
 function playRound() {
     const playerSelection = getPlayerChoice();
     const computerSelection = getComputerChoice();
-    //temp fix for wrong inputs, not quite right though
-    if (!(playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissors')) {
-        alert('You didn\'t make an appropriate choice');
-        return;
-    }else {
-        console.log(`You chose: ${playerSelection}, Computer chose: ${computerSelection}`);
+        console.log(`Round: ${roundNum} -- You chose: ${playerSelection}, Computer chose: ${computerSelection}`);
        if (playerSelection === computerSelection) {
           console.log('This round is a draw');
-           return "draw";
+           return "draw", roundNum++;
        }else if(
-            (playerSelection === 'rock' && computerSelection === 'scissors') ||
+           (playerSelection === 'rock' && computerSelection === 'scissors') ||
            (playerSelection === 'paper' && computerSelection === 'rock') ||
-            (playerSelection === 'scissors' && computerSelection === 'paper')) {
+           (playerSelection === 'scissors' && computerSelection === 'paper')) {
            console.log('You win!!');
-           return playerScore++;
+           return playerScore++, roundNum++;
        }else {
            console.log('You lose, better luck next time.')
-           return computerScore++;
-    }
+           return computerScore++, roundNum++;
     }
 }
 
@@ -53,5 +51,6 @@ function game() {
 
 let playerScore = 0;
 let computerScore = 0;
+let roundNum = 1;
 console.log(game());
 

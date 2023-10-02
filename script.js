@@ -1,31 +1,32 @@
 function getComputerChoice() {
     let choices = ["Rock", "Paper", "Scissors"];
     let computerChoice = choices[Math.floor(Math.random() * choices.length)];
-    return computerChoice.toLowerCase();
+    return computerChoice;
 }
 
-
-
+//needs case sensitivity fixing
 function getPlayerChoice() {
-    let playerChoice = prompt('Please choose Rock, Paper or Scissors.');
-    while (playerChoice === null || playerChoice === undefined || playerChoice === '') {
+    let playerChoice = prompt('Please choose Rock, Paper or Scissors.').toLowerCase();
+    while (
+          (playerChoice === null || playerChoice === undefined || playerChoice === '') || 
+          !(playerChoice === 'rock' || playerChoice === 'paper' || playerChoice === 'scissors')) {
             playerChoice = prompt('That was not a valid choice, please make sure to choose either Rock, Paper or Scissors.');
     }
     return playerChoice;
 }
 
-
 function playRound() {
     const playerSelection = getPlayerChoice();
     const computerSelection = getComputerChoice();
-        console.log(`Round: ${roundNum} -- You chose: ${playerSelection}, Computer chose: ${computerSelection}`);
+        console.log(`Round: ${roundNum}`);
+        console.log(`You chose: ${playerSelection}, Computer chose: ${computerSelection}`);
        if (playerSelection === computerSelection) {
           console.log('This round is a draw');
            return "draw", roundNum++;
        }else if(
-           (playerSelection === 'rock' && computerSelection === 'scissors') ||
-           (playerSelection === 'paper' && computerSelection === 'rock') ||
-           (playerSelection === 'scissors' && computerSelection === 'paper')) {
+           (playerSelection === 'rock' && computerSelection === 'Scissors') ||
+           (playerSelection === 'paper' && computerSelection === 'Rock') ||
+           (playerSelection === 'scissors' && computerSelection === 'Paper')) {
            console.log('You win!!');
            return playerScore++, roundNum++;
        }else {
